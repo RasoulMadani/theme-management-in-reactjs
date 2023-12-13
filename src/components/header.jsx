@@ -1,7 +1,17 @@
+import { useThemeContext } from "../context";
+
 const Header = () => {
+  const theme = useThemeContext();
+  const darkMode = theme.darkMode;
+
+  const changeTheme = () => {
+    theme.setDarkMode(!darkMode);
+  };
   return (
     <header
-      className="navbar navbar-expand bg-secondary navbar-light shadow-sm"
+      className={`navbar navbar-expand ${
+        darkMode ? "navbar-dark bg-dark" : "bg-secondary navbar-light"
+      }  shadow-sm`}
       style={{ width: "100vw" }}
     >
       <div className="container">
@@ -27,8 +37,12 @@ const Header = () => {
             </a>
           </li>
         </ul>
-        <button className="btn btn-dark" type="button">
-          تاریک
+        <button
+        onClick={changeTheme}
+          className={`btn ${darkMode ? "btn-light" : "btn-dark"} `}
+          type="button"
+        >
+          {darkMode ? "روشن" : "تاریک"}
         </button>
       </div>
     </header>
